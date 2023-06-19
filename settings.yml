@@ -1,0 +1,70 @@
+# settings file to set the parameters involved in each experiment
+# Author: Anonymous
+#
+#------------------------------------
+# General settings
+#------------------------------------
+general_settings:
+  set_seed: True
+
+#------------------------------------
+# Flow
+#------------------------------------
+step:
+  source_only: False
+  dann: False
+  ict_dann: True
+  ict_only: False
+#------------------------------------
+# data
+#------------------------------------
+data:
+  batch_size: 128
+  shuffle: True
+  nb_workers: 0
+  drop_last: True
+
+#------------------------------------
+# datasets: [MNIST, MNISTM, USPS]
+# training
+#------------------------------------
+
+training:
+  source_dataset_name: 'MNIST'
+  target_dataset_name: 'USPS'
+  nb_epochs: 300
+  early_stopping: False
+  patience: 0
+
+  grl_multiplier: 1.0
+
+  mixup:
+    beta_parameter: 0.1
+
+  ict:
+    loss: 'ce' # [ce, mse]
+    ict_start_epoch: 30
+
+    do_rampup: False
+    ramp_up_start: 0
+    ramp_up_end: 75
+
+    do_confidence_threshold: False
+    confidence_threshold: 0.968
+
+    alpha: 0.999
+
+  optimizer:
+    type: 'sgd'  # [adam, sgd, rmsprop]
+    lr: 0.001  # 0.001, 0.0002
+    momentum: 0.9
+    beta_1: 0.5
+    beta_2: 0.999
+
+  models:
+    base_dir_output: 'outputs/models'
+    model_f_name: 'feature_extractor.pt'
+    classifier_f_name: 'classifier.pt'
+
+  plot_root_dir: 'outputs/plots'
+
